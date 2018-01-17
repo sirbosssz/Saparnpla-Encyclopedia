@@ -14,9 +14,20 @@ export default class ItemList extends Component {
   componentDidMount() {
     let fish = []
     fetch('http://smartfishermans.com:7777/api/fish').then((resp) => resp.json()).then(data => {
+      data.sort((a, b) => {
+        var nameA = a.thai_name;
+        var nameB = b.thai_name;
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      })
       let size = data.length
       let pages = Math.ceil(size/14);
-      let index = 0;
+      let index = 0
       for (var i = 0; i < pages; i++) {
         let temp = []
         for (var j = 0; j < 14; j++){
@@ -35,7 +46,7 @@ export default class ItemList extends Component {
     })
   }
   render() {
-    let index = 5;
+    let index = 0;
     let showList = []
     if(!this.state.isLoading){
       for (var i = 0; i < 14; i++) {
