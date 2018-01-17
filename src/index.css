@@ -1,5 +1,95 @@
-body {
+body, body * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'ThaiSansNeue', sans-serif;
+}
+body{
+  background: #F9F9F9;
+}
+/* Header.jsx */
+
+.header {
+  background: #ffe7c1;
+  background: -moz-linear-gradient(left, #ffe7c1 30%, #0572b8 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(30%, #ffe7c1), color-stop(100%, #0572b8));
+  background: -webkit-linear-gradient(left, #ffe7c1 30%, #0572b8 100%);
+  background: -o-linear-gradient(left, #ffe7c1 30%, #0572b8 100%);
+  background: -ms-linear-gradient(left, #ffe7c1 30%, #0572b8 100%);
+  background: linear-gradient(to right, #FFE7C1 30%, #0572B8 100%);
+  min-height: 150px;
+}
+
+.header .container {
+  padding: 1em;
+  width: 100%;
+}
+
+.header h2 {
+  font-size: 20pt;
+  font-weight: bold;
+  line-height: 0.8em;
+}
+
+.header h1 {
+  font-weight: lighter;
+  font-size: 40pt;
+  line-height: 1em;
+}
+
+.searchbar {
+  margin-bottom: .5em;
+  margin-top: 1.5em;
+}
+
+.searchbar input {
+  font-size: 18pt;
+  height: 40px;
+  padding: .1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 0;
+  line-height: 1em;
+  width: calc(100% - (.6em + 18pt));
+}
+
+.searchbar button {
+  font-size: 18pt;
+  padding-bottom: .2em;
+  padding-top: .2em;
+  padding-left: .3em;
+  padding-right: .3em;
+  color: #ededed;
+  background: #444444;
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  .title {
+    margin-top: .4em;
+  }
+  .header h2 {
+    font-size: 28pt;
+  }
+  .header h1 {
+    font-size: 50pt;
+  }
+  .header .container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .searchbar input {
+    width: 300px;
+  }
+}
+
+/* ItemList.jsx */
+.itemhead{
+  margin-top: .5em;
+  text-align: center;
+}
+.itemhead h2{
+  font-size: 26pt;
+}
+.itemhead h3{
+  font-size: 16pt;
 }

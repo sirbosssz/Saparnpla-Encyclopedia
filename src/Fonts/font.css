@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'ThaiSansNeue';
+  src: url('ThaiSansNeue-Regular.ttf');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'ThaiSansNeue';
+  src: url('ThaiSansNeue-Bold.ttf');
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'ThaiSansNeue';
+  src: url('ThaiSansNeue-Light.ttf');
+  font-weight: lighter;
+}
