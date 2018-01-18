@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 export default class Card extends Component {
   popup = () => {
-    document.getElementById('popup').style.display = 'inherit';
+    document.getElementById('popup').style.display = 'inherit'
+    document.getElementById('p-card').style.display = 'inherit'
   }
 
   render() {
