@@ -3,9 +3,11 @@ body, body * {
   padding: 0;
   font-family: 'ThaiSansNeue', sans-serif;
 }
-body{
+
+body {
   background: #F9F9F9;
 }
+
 /* Header.jsx */
 
 .header {
@@ -17,6 +19,7 @@ body{
   background: -ms-linear-gradient(left, #ffe7c1 30%, #0572b8 100%);
   background: linear-gradient(to right, #FFE7C1 30%, #0572B8 100%);
   min-height: 150px;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
 }
 
 .header .container {
@@ -34,6 +37,10 @@ body{
   font-weight: lighter;
   font-size: 40pt;
   line-height: 1em;
+}
+
+.inputgroup {
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
 }
 
 .searchbar {
@@ -83,13 +90,69 @@ body{
 }
 
 /* ItemList.jsx */
-.itemhead{
+
+.itemhead {
   margin-top: .5em;
   text-align: center;
 }
-.itemhead h2{
-  font-size: 26pt;
+
+.itemhead h2 {
+  font-size: 30pt;
 }
-.itemhead h3{
+
+.itemhead h3 {
   font-size: 16pt;
+}
+
+.cardarea {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+/* Card.jsx */
+
+.fish-card {
+  height: 90%;
+  background: #fff;
+  margin-bottom: .5em;
+  margin-top: .5em;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all .7s ease;
+}
+.fish-card:hover{
+  background: #ededed;
+  box-shadow: 0 0 10px 3px #f00;
+}
+
+.fish-card img {
+  padding: .7em;
+  padding-top: .7em;
+  padding-bottom: .2em;
+  width: 100%;
+  height: 150px;
+  display: block;
+  object-fit: cover;
+}
+
+.fish-card span {
+  display: block;
+  font-size: 16pt;
+  text-align: center;
+  padding: .5em;
+  padding-top: 0;
+  padding-bottom: .7em;
+}
+
+/* Popup.jsx */
+.fullscreen{
+  width: 100vw;
+  min-height: 100vh;
+}
+.popup-background{
+  background: rgba(0, 0, 0, 0.8);
+}
+#popup{
+  position: fixed;
+  z-index: 1000;
 }
