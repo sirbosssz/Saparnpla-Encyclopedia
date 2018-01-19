@@ -6,9 +6,11 @@ export default class ItemList extends Component {
   	super(props);
   	this.state = {
       search: false,
-      text: 'ปลาอะไรสักอย่าง',
+      text: 'ปลาที่ค้นหา',
       fish: [],
+      selectedFish: [],
       isLoading: true,
+      index: 0,
     };
   }
 
@@ -21,10 +23,10 @@ export default class ItemList extends Component {
       for (var i = 0; i < pages; i++) {
         let temp = []
         for (var j = 0; j < 12; j++){
-          if(index > 0){
+          if(index >= 0){
             temp[j] = data[index]
+            index--
           }
-          index--
         }
         fish[i] = temp
       }
@@ -32,15 +34,39 @@ export default class ItemList extends Component {
       this.setState({
         fish: fish,
         isLoading: false,
+        selectedFish: fish[this.state.index],
       })
     })
   }
+
+  nextPage = () => {
+    let index = this.state.index
+    if (index+1 <= this.state.fish.length - 1){
+      index = index+1
+      this.setState({
+        index: index,
+        selectedFish: this.state.fish[index],
+      })
+    }
+  }
+
+  previousPage = () => {
+    let index = this.state.index
+    if (index-1 >= 0){
+      index = index-1
+      this.setState({
+        index: index,
+        selectedFish: this.state.fish[index],
+      })
+    }
+  }
+
   render() {
-    let index = 0;
+    let index = this.state.index
     let showList = []
     if(!this.state.isLoading){
-      for (var i = 0; i < 12; i++) {
-        showList[i] = (<Card key={this.state.fish[index][i].id} fish={this.state.fish[index][i]} />)
+      for (var i = 0; i < this.state.selectedFish.length; i++) {
+        showList[i] = (<Card key={i} fish={this.state.selectedFish[i]} />)
       }
     }
     return (
@@ -52,6 +78,27 @@ export default class ItemList extends Component {
         <div className="cardarea">
           <div className="row">
             {showList}
+          </div>
+          <div className="page">
+            <button className={index > 0 ? "page-button" : "page-button disabled-button"} onClick={this.previousPage}>
+              <i className="fas fa-angle-left"></i>
+            </button>
+            {index > 0 && (
+              <button className="page-button numbers" onClick={this.previousPage}>
+                {index}
+              </button>
+            )}
+            <button className="page-button numbers selected-button">
+              {index+1}
+            </button>
+            {index <= this.state.fish.length-2 && (
+              <button className="page-button numbers" onClick={this.nextPage}>
+                {index+2}
+              </button>
+            )}
+            <button className={index <= this.state.fish.length-2 ? "page-button" : "page-button disabled-button"} onClick={this.nextPage}>
+              <i className="fas fa-angle-right"></i>
+            </button>
           </div>
         </div>
       </div>

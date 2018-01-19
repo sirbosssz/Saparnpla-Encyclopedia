@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 
 class Header extends Component {
   constructor() {
     super();
     this.state = {
-      search: ''
+      search: '',
+      type: 'th_name',
     };
   }
 
@@ -16,6 +18,13 @@ class Header extends Component {
     this.setState({
       [name]: value
     })
+
+    setTimeout(() => {
+      this.props.searchTextChange({
+        text: this.state.search,
+        type: this.state.type,
+      })
+    }, 1)
   }
 
   handleSubmit = event => {
@@ -23,8 +32,14 @@ class Header extends Component {
   }
 
   focus = () => {
-    document.getElementById('popup').style.display = 'inherit'
+    document.getElementById('popup').classList.remove('d-none');
     document.querySelector('.searchbar').style.zIndex = 1001;
+    if (window.innerWidth < 768) {
+      document.querySelector('.header .title').classList.add('d-none')
+    }
+    if (window.innerWidth >= 990) {
+      document.querySelector('.searchbar input').classList.add('focus')
+    }
   }
 
   render() {
@@ -49,4 +64,21 @@ class Header extends Component {
   }
 }
 
-export default Header
+const mapStateToProps = state => {
+  return{
+    search_text: state.search_text,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    searchTextChange: text => {
+      dispatch({
+        type: 'SEARCH_TEXT',
+        payload: text,
+      })
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

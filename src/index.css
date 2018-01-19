@@ -7,6 +7,9 @@ body, body * {
 body {
   background: #F9F9F9;
 }
+.d-none {
+  display: none;
+}
 
 /* Header.jsx */
 
@@ -25,6 +28,7 @@ body {
 .header .container {
   padding: 1em;
   width: 100%;
+  display: grid;
 }
 
 .header h2 {
@@ -89,7 +93,12 @@ body {
   .searchbar input {
     width: 300px;
   }
-  .searchbar input:focus{
+  .focus{
+    width: 500px;
+  }
+}
+@media (min-width: 990px) {
+  .searchbar input.focus{
     width: 500px;
   }
 }
@@ -112,6 +121,44 @@ body {
 .cardarea {
   margin-bottom: 1em;
   margin-top: 1em;
+}
+.page{
+  margin: 1em;
+  margin-bottom: 2em;
+  text-align: center;
+}
+.page-button {
+  font-size: 16pt;
+  font-weight: bold;
+  padding: .5em;
+  line-height: 1em;
+  background: #3993ce;
+  color: #fff;
+  border: 0;
+  margin-left: .2em;
+  margin-right: .2em;
+  cursor: pointer;
+  transition: all .5s ease;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+}
+.page-button:hover{
+  background: #0572b8;
+}
+.page-button.selected-button{
+  box-shadow: 0 0 5px 2px #3993ce;
+  cursor: not-allowed;
+}
+.page-button.selected-button:hover{
+  background: #3993ce;
+}
+.page-button.disabled-button{
+  background: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+}
+.page-button.numbers {
+  font-size: 20pt;
+  line-height: .6em;
+  padding-bottom: .65em;
 }
 
 /* Card.jsx */
@@ -162,7 +209,6 @@ body {
   position: fixed;
   z-index: 1000;
   overflow-y: auto;
-  display: none;
 }
 
 /* PopupCard.jsx */
@@ -183,7 +229,6 @@ body {
   cursor: pointer;
 }
 #p-card{
-  display: none;
   z-index: 2000;
 }
 .p-card{
