@@ -2,7 +2,9 @@ export const SEARCH_TEXT = 'SEARCH_TEXT';
 export const FISH = 'FISH';
 
 export const state = {
-  search_text: {},
+  search_text: {
+    search: '',
+  },
   fish: {
     thai_name: '-',
     english_name: '-',

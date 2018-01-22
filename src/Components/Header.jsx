@@ -6,7 +6,6 @@ class Header extends Component {
     super();
     this.state = {
       search: '',
-      type: 'th_name',
     };
   }
 
@@ -22,7 +21,6 @@ class Header extends Component {
     setTimeout(() => {
       this.props.searchTextChange({
         text: this.state.search,
-        type: this.state.type,
       })
     }, 1)
   }

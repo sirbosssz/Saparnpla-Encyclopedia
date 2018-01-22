@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Card from './Card';
 
-export default class ItemList extends Component {
+class ItemList extends Component {
   constructor(props){
   	super(props);
   	this.state = {
       search: false,
       text: 'ปลาที่ค้นหา',
       fish: [],
+      originalFish: [],
       selectedFish: [],
       isLoading: true,
       index: 0,
@@ -18,11 +20,11 @@ export default class ItemList extends Component {
     let fish = []
     fetch('http://smartfishermans.com:7777/api/fish').then((resp) => resp.json()).then(data => {
       let size = data.length
-      let pages = Math.ceil(size/12);
+      let pages = Math.ceil(size/24);
       let index = data.length - 1
       for (var i = 0; i < pages; i++) {
         let temp = []
-        for (var j = 0; j < 12; j++){
+        for (var j = 0; j < 24; j++){
           if(index >= 0){
             temp[j] = data[index]
             index--
@@ -30,13 +32,61 @@ export default class ItemList extends Component {
         }
         fish[i] = temp
       }
-      console.log(fish)
+      // console.log(fish)
       this.setState({
         fish: fish,
         isLoading: false,
         selectedFish: fish[this.state.index],
+        originalFish: fish,
       })
     })
+    this.searchUpdate = setInterval(() => {
+      let search = true
+      let text = this.props.search_text.text
+      if (!text) {search = false}
+      this.setState({
+        search: search,
+        text: text,
+      })
+      if (!this.state.isLoading && search) {
+        let fish = this.state.originalFish
+        let temp = []
+        fish.forEach(page => {
+          page.forEach(item => {
+            if ((item.thai_name.indexOf(text) !== -1) || (item.english_name.indexOf(text) !== -1) || (item.scientific_name.indexOf(text) !== -1) || (item.local_name.indexOf(text) !== -1)) {
+              temp.push(item)
+            }
+          })
+        })
+        let temp2 = []
+        if (temp.length >= 24) {
+          let index = 0
+          for (var i = 0; i < temp.length; i++) {
+            let temp3 = []
+            for (var j = 0; j < 24; j++) {
+              temp3[j] = temp[index++]
+            }
+            temp2[i] = temp3
+          }
+        } else {
+          temp2[0] = temp
+        }
+        this.setState({
+          fish: temp2,
+          selectedFish: temp2[this.state.index]
+        })
+      } else if (!this.state.isLoading && !search) {
+        fish = this.state.originalFish
+        this.setState({
+          fish: fish,
+          selectedFish: fish[this.state.index],
+        })
+      }
+    }, 1000/30)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.searchUpdate)
   }
 
   nextPage = () => {
@@ -48,6 +98,10 @@ export default class ItemList extends Component {
         selectedFish: this.state.fish[index],
       })
     }
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
   previousPage = () => {
@@ -59,12 +113,16 @@ export default class ItemList extends Component {
         selectedFish: this.state.fish[index],
       })
     }
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
   render() {
     let index = this.state.index
     let showList = []
-    if(!this.state.isLoading){
+    if(!this.state.isLoading) {
       for (var i = 0; i < this.state.selectedFish.length; i++) {
         showList[i] = (<Card key={i} fish={this.state.selectedFish[i]} />)
       }
@@ -105,3 +163,10 @@ export default class ItemList extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return{
+    search_text: state.search_text,
+  }
+}
+
+export default connect(mapStateToProps)(ItemList)
