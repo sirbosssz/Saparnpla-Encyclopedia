@@ -13,7 +13,7 @@ class PopupCard extends Component {
         <div className="row">
           <div className="col-md-7">
             <div className="p-img">
-              <img src={fish.link_photo} alt="fish_photo" width="100%" />
+              <img src={"http://smartfishermans.com:7777/image/"+fish.link_photo} alt="fish_photo" width="100%" />
             </div>
           </div>
           <div className="col-md">

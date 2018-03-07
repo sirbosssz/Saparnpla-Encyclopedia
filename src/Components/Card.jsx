@@ -18,7 +18,7 @@ class Card extends Component {
     return (
       <div className="col-sm-6 col-md-4 col-lg-3">
         <div className="fish-card" onClick={this.popup}>
-          <img src={this.props.fish.link_photo} alt="fish_photo" height="200px"/>
+          <img src={"http://smartfishermans.com:7777/image/"+this.props.fish.link_photo} alt="fish_photo" height="200px"/>
           <span>{name}</span>
         </div>
       </div>

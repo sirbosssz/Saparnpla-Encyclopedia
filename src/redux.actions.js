@@ -4,6 +4,10 @@ export const FISH = 'FISH';
 export const state = {
   search_text: {
     search: '',
+    thai_name: true,
+    english_name: true,
+    scientific_name: true,
+    local_name: true,
   },
   fish: {
     thai_name: '-',

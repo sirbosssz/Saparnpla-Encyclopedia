@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Header extends Component {
@@ -6,12 +6,17 @@ class Header extends Component {
     super();
     this.state = {
       search: '',
+      thai_name: true,
+      english_name: true,
+      scientific_name: true,
+      local_name: true,
+      focus: false,
     };
   }
 
   handleSearch = event => {
     const target = event.target
-    const value = target.value
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name
 
     this.setState({
@@ -21,6 +26,10 @@ class Header extends Component {
     setTimeout(() => {
       this.props.searchTextChange({
         text: this.state.search,
+        thai_name: this.state.thai_name,
+        english_name: this.state.english_name,
+        scientific_name: this.state.scientific_name,
+        local_name: this.state.local_name,
       })
     }, 1)
   }
@@ -30,7 +39,9 @@ class Header extends Component {
   }
 
   focus = () => {
+
     document.getElementById('popup').classList.remove('d-none');
+    document.getElementById('check').classList.remove('d-none');
     document.querySelector('.searchbar').style.zIndex = 1001;
     if (window.innerWidth < 768) {
       document.querySelector('.header .title').classList.add('d-none')
@@ -50,10 +61,28 @@ class Header extends Component {
         <div className="searchbar">
           <form onSubmit={this.handleSubmit}>
             <div className="inputgroup">
-              <input type="text" placeholder="ค้นหาชื่อปลาที่สนใจ" name='search' value={this.state.search} onChange={this.handleSearch} onFocus={this.focus} />
+              <input className="search" type="text" placeholder="ค้นหาชื่อปลาที่สนใจ" name='search' value={this.state.search} onChange={this.handleSearch} onFocus={this.focus} />
               <button type='submit'>
                 <i className="fas fa-search"></i>
               </button>
+            </div>
+            <div id="check" className="d-none">
+              <div>
+                <input type="checkbox" name="thai_name" checked={this.state.thai_name} onChange={this.handleSearch} />
+                <span>ชื่อภาษาไทย</span>
+              </div>
+              <div>
+                <input type="checkbox" name="english_name" checked={this.state.english_name} onChange={this.handleSearch} />
+                <span>ชื่อภาษาอังกฤษ</span>
+              </div>
+              <div>
+                <input type="checkbox" name="scientific_name" checked={this.state.scientific_name} onChange={this.handleSearch} />
+                <span>ชื่อทางวิทยาศาสตร์</span>
+              </div>
+              <div>
+                <input type="checkbox" name="local_name" checked={this.state.local_name} onChange={this.handleSearch} />
+                <span>ชื่อท้องถิ่น</span>
+              </div>
             </div>
           </form>
         </div>
@@ -63,7 +92,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => {
-  return{
+  return {
     search_text: state.search_text,
   }
 }

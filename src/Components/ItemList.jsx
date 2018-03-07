@@ -40,9 +40,15 @@ class ItemList extends Component {
         originalFish: fish,
       })
     })
+    // search fish
     this.searchUpdate = setInterval(() => {
       let search = true
       let text = this.props.search_text.text
+      let thai_name = this.props.search_text.thai_name, 
+      english_name = this.props.search_text.english_name, 
+      scientific_name = this.props.search_text.scientific_name, 
+      local_name = this.props.search_text.local_name
+
       if (!text) {search = false}
       this.setState({
         search: search,
@@ -53,7 +59,7 @@ class ItemList extends Component {
         let temp = []
         fish.forEach(page => {
           page.forEach(item => {
-            if ((item.thai_name.indexOf(text) !== -1) || (item.english_name.indexOf(text) !== -1) || (item.scientific_name.indexOf(text) !== -1) || (item.local_name.indexOf(text) !== -1)) {
+            if ((item.thai_name.indexOf(text) !== -1 && thai_name) || (item.english_name.indexOf(text) !== -1 && english_name) || (item.scientific_name.indexOf(text) !== -1 && scientific_name) || (item.local_name.indexOf(text) !== -1 && local_name)) {
               temp.push(item)
             }
           })
@@ -104,10 +110,40 @@ class ItemList extends Component {
     })
   }
 
+  nextTwoPage = () => {
+    let index = this.state.index
+    if (index+2 <= this.state.fish.length - 2){
+      index = index+2
+      this.setState({
+        index: index,
+        selectedFish: this.state.fish[index],
+      })
+    }
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
   previousPage = () => {
     let index = this.state.index
     if (index-1 >= 0){
       index = index-1
+      this.setState({
+        index: index,
+        selectedFish: this.state.fish[index],
+      })
+    }
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  previousTwoPage = () => {
+    let index = this.state.index
+    if (index-2 >= 0){
+      index = index-2
       this.setState({
         index: index,
         selectedFish: this.state.fish[index],
@@ -141,6 +177,11 @@ class ItemList extends Component {
             <button className={index > 0 ? "page-button" : "page-button disabled-button"} onClick={this.previousPage}>
               <i className="fas fa-angle-left"></i>
             </button>
+            {index-1 > 0 && (
+              <button className="page-button numbers" onClick={this.previousTwoPage}>
+                {index-1}
+              </button>
+            )}
             {index > 0 && (
               <button className="page-button numbers" onClick={this.previousPage}>
                 {index}
@@ -152,6 +193,11 @@ class ItemList extends Component {
             {index <= this.state.fish.length-2 && (
               <button className="page-button numbers" onClick={this.nextPage}>
                 {index+2}
+              </button>
+            )}
+            {index <= this.state.fish.length-3 && (
+              <button className="page-button numbers" onClick={this.nextTwoPage}>
+                {index+3}
               </button>
             )}
             <button className={index <= this.state.fish.length-2 ? "page-button" : "page-button disabled-button"} onClick={this.nextPage}>

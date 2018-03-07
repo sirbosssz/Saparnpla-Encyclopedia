@@ -1,5 +1,6 @@
 export const hidePopup = () => {
   document.getElementById('popup').classList.add('d-none')
+  document.getElementById('check').classList.add('d-none')
   document.getElementById('p-card').classList.add('d-none')
   document.querySelector('.searchbar').style.zIndex = 10;
   if ( window.innerWidth < 768 ) {

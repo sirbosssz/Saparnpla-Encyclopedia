@@ -53,7 +53,7 @@ body {
   z-index: 10;
 }
 
-.searchbar input {
+.searchbar input.search {
   font-size: 18pt;
   height: 40px;
   padding: .1em;
@@ -75,6 +75,26 @@ body {
   background: #444444;
   border: 0;
 }
+#check{
+  margin-top: .5em;
+  color: #ededed;
+  font-size: 16pt;
+  padding: .2em;
+  float: left;
+}
+#check div{
+  display: inline-block;
+  padding-right: .5em;
+}
+#check input{
+  width: 20px;
+  height: 20px;
+  line-height: 1em;
+}
+#check span{
+  padding-right: .5em;
+  padding-left: .2em;
+}
 
 @media (min-width: 768px) {
   .title {
@@ -90,7 +110,7 @@ body {
     display: flex;
     justify-content: space-between;
   }
-  .searchbar input {
+  .searchbar input.search {
     width: 300px;
   }
   .focus{
@@ -98,7 +118,7 @@ body {
   }
 }
 @media (min-width: 990px) {
-  .searchbar input.focus{
+  .searchbar input.search.focus{
     width: 500px;
   }
 }
@@ -184,7 +204,7 @@ body {
   width: 100%;
   height: 150px;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .fish-card span {
