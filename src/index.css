@@ -1,7 +1,7 @@
 body, body * {
   margin: 0;
   padding: 0;
-  font-family: 'ThaiSansNeue', sans-serif;
+  font-family: 'Quark', sans-serif;
 }
 
 body {
@@ -150,7 +150,8 @@ body {
 .page-button {
   font-size: 16pt;
   font-weight: bold;
-  padding: .5em;
+  padding: .4em;
+  padding-top: .6em;
   line-height: 1em;
   background: #3993ce;
   color: #fff;

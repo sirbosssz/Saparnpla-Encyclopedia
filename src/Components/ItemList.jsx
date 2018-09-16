@@ -170,6 +170,37 @@ class ItemList extends Component {
           <h3>คลิกที่ปลาเพื่อดูรายละเอียด</h3>
         </div>
         <div className="cardarea">
+        <div className="page">
+            <button className={index > 0 ? "page-button" : "page-button disabled-button"} onClick={this.previousPage}>
+              <i className="fas fa-angle-left"></i>
+            </button>
+            {index-1 > 0 && (
+              <button className="page-button numbers" onClick={this.previousTwoPage}>
+                {index-1}
+              </button>
+            )}
+            {index > 0 && (
+              <button className="page-button numbers" onClick={this.previousPage}>
+                {index}
+              </button>
+            )}
+            <button className="page-button numbers selected-button">
+              {index+1}
+            </button>
+            {index <= this.state.fish.length-2 && (
+              <button className="page-button numbers" onClick={this.nextPage}>
+                {index+2}
+              </button>
+            )}
+            {index <= this.state.fish.length-3 && (
+              <button className="page-button numbers" onClick={this.nextTwoPage}>
+                {index+3}
+              </button>
+            )}
+            <button className={index <= this.state.fish.length-2 ? "page-button" : "page-button disabled-button"} onClick={this.nextPage}>
+              <i className="fas fa-angle-right"></i>
+            </button>
+          </div>
           <div className="row">
             {showList}
           </div>
