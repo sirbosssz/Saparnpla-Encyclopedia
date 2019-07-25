@@ -1,5 +1,5 @@
 # Saparnpla Encyclopedia
------------------------------------------------
+
 ## Tag
 **type:** Outsource Project
 
