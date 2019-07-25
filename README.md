@@ -1,6 +1,7 @@
 # Saparnpla Encyclopedia
-**type:** Outsource Project
 -----------------------------------------------
+## Tag
+**type:** Outsource Project
 
 ## Project Description
 This encyclopedia is a website for fisherman or who wanted to learn about fish, This website is combined with Smartfisherman Project (closed in 2018)
